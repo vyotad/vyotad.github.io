@@ -1,1 +1,0 @@
-# vyotad.github.io
