@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vyotads shit</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=MS+Sans+Serif:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'MS Sans Serif', 'Courier New', monospace;
+            background: #008080;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .desktop-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80px;
+            margin: 20px;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .desktop-icon img {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 5px;
+        }
+        
+        .desktop-icon span {
+            color: white;
+            font-size: 11px;
+            text-shadow: 1px 1px 2px black;
+        }
+        
+        .window {
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #ffffff #000000 #000000 #ffffff;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 600px;
+        }
+        
+        .title-bar {
+            background: linear-gradient(to right, #000080, #1084d0);
+            padding: 3px 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .title-bar-text {
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .title-bar-controls button {
+            width: 18px;
+            height: 18px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #ffffff #000000 #000000 #ffffff;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 2px;
+        }
+        
+        .title-bar-controls button:active {
+            border-color: #000000 #ffffff #ffffff #000000;
+        }
+        
+        .window-body {
+            padding: 20px;
+            background: #c0c0c0;
+        }
+        
+        .menu-bar {
+            background: #c0c0c0;
+            border-bottom: 2px solid;
+            border-color: #ffffff #000000 #000000 #ffffff;
+            padding: 3px;
+            font-size: 11px;
+        }
+        
+        .content-area {
+            background: white;
+            border: 2px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
+            padding: 15px;
+            margin-top: 10px;
+            min-height: 200px;
+        }
+        
+        h1 {
+            font-size: 24px;
+            color: #000080;
+            margin-bottom: 15px;
+        }
+        
+        .link-button {
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #ffffff #000000 #000000 #ffffff;
+            padding: 10px 15px;
+            margin: 10px 0;
+            cursor: pointer;
+            font-family: 'MS Sans Serif', sans-serif;
+            font-size: 12px;
+            display: block;
+            text-align: left;
+            text-decoration: none;
+            color: black;
+            transition: none;
+        }
+        
+        .link-button:hover {
+            background: #d4d0c8;
+        }
+        
+        .link-button:active {
+            border-color: #000000 #ffffff #ffffff #000000;
+            padding: 11px 14px 9px 16px;
+        }
+        
+        .link-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: #ffff00;
+            border: 1px solid black;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        .status-bar {
+            background: #c0c0c0;
+            border-top: 2px solid;
+            border-color: #ffffff #000000 #000000 #ffffff;
+            padding: 3px 5px;
+            font-size: 11px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .status-section {
+            border: 2px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
+            padding: 2px 5px;
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="window">
+        <div class="title-bar">
+            <div class="title-bar-text">📁 vyotads shit</div>
+            <div class="title-bar-controls">
+                <button>_</button>
+                <button>□</button>
+                <button>×</button>
+            </div>
+        </div>
+        <div class="menu-bar">
+            File  Edit  View  Help
+        </div>
+        <div class="window-body">
+            <div class="content-area">
+                <h1>Welcome to My Portfolio</h1>
+                <p style="margin-bottom: 20px;">Check out my projects below:</p>
+                
+                <a href="https://vyotad.github.io/stevenhere" target="_blank" class="link-button">
+                    <span class="link-icon">🕐</span>
+                    if you wanna see how long steven lin's been gone click here dawg
+                </a>
+                
+                <a href="https://vyotad.github.io/hzalphabet" target="_blank" class="link-button">
+                    <span class="link-icon">🔤</span>
+                    i built a language dawg go on and click it dawg
+                </a>
+                
+                <p style="margin-top: 20px; font-size: 11px; color: #666;">
+                    Welcoem to my shit
+                </p>
+            </div>
+        </div>
+        <div class="status-bar">
+            <div class="status-section">Ready</div>
+            <div class="status-section" style="flex: 0 0 100px; text-align: right;">2 items</div>
+        </div>
+    </div>
+</body>
+</html>
