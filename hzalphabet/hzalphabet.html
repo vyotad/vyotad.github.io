@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HZAlphabet</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "MS Sans Serif", "Microsoft Sans Serif", sans-serif;
+  background: url('XPIMG.JPG') center/cover no-repeat fixed;
+  color: #000000;
+  padding: 20px;
+  line-height: 1.6;
+}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+h1 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ffffff;
+  background: linear-gradient(to bottom, #0997FF, #0053EE 8%, #003DD9 40%, #0050EE);
+  padding: 3px 5px;
+  letter-spacing: 0.5px;
+  border-radius: 6px 6px 0 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+.tabs {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 0;
+}
+.tab {
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #000000 #000000 #ffffff;
+  color: #000000;
+  padding: 4px 16px;
+  font-size: 11px;
+  cursor: pointer;
+  font-weight: normal;
+}
+.tab:active {
+  border-color: #000000 #ffffff #ffffff #000000;
+}
+.tab.active {
+  background: #c0c0c0;
+  border-bottom-color: #c0c0c0;
+  padding-bottom: 6px;
+  margin-bottom: -2px;
+  position: relative;
+  z-index: 2;
+}
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
+.section {
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #000000 #000000 #ffffff;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+.section-title {
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #000000;
+}
+textarea {
+  width: 100%;
+  height: 100px;
+  background: #ffffff;
+  border: 2px solid;
+  border-color: #000000 #ffffff #ffffff #000000;
+  color: #000000;
+  padding: 4px;
+  font-size: 11px;
+  font-family: "Courier New", monospace;
+  resize: vertical;
+}
+textarea:focus {
+  outline: 1px dotted #000000;
+  outline-offset: -3px;
+}
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.control-group label {
+  font-size: 11px;
+  color: #000000;
+  font-weight: normal;
+}
+.control-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+input[type="number"] {
+  width: 70px;
+  background: #ffffff;
+  border: 2px solid;
+  border-color: #000000 #ffffff #ffffff #000000;
+  color: #000000;
+  padding: 2px 4px;
+  font-size: 11px;
+  font-family: "MS Sans Serif", sans-serif;
+}
+input[type="range"] {
+  flex: 1;
+  height: 20px;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #000000 #ffffff #ffffff #000000;
+  outline: none;
+  -webkit-appearance: none;
+  padding: 2px;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 18px;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #000000 #000000 #ffffff;
+  cursor: pointer;
+  box-shadow: 1px 1px 0 #000000;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 18px;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #000000 #000000 #ffffff;
+  cursor: pointer;
+  box-shadow: 1px 1px 0 #000000;
+}
+input[type="number"]:focus {
+  outline: 1px dotted #000000;
+  outline-offset: -3px;
+}
+input[type="file"] {
+  background: #ffffff;
+  border: 2px solid;
+  border-color: #000000 #ffffff #ffffff #000000;
+  color: #000000;
+  padding: 4px;
+  font-size: 11px;
+  cursor: pointer;
+  width: 100%;
+  font-family: "MS Sans Serif", sans-serif;
+}
+.buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+button {
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #000000 #000000 #ffffff;
+  color: #000000;
+  padding: 4px 12px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: "MS Sans Serif", sans-serif;
+  font-weight: normal;
+  min-width: 75px;
+}
+button:active:not(:disabled) {
+  border-color: #000000 #ffffff #ffffff #000000;
+  padding: 5px 11px 3px 13px;
+}
+button:disabled {
+  color: #808080;
+  text-shadow: 1px 1px 0 #ffffff;
+}
+button:focus {
+  outline: 1px dotted #000000;
+  outline-offset: -4px;
+}
+.info {
+  font-size: 11px;
+  color: #000000;
+  margin-top: 8px;
+  padding: 4px;
+  background: #c0c0c0;
+}
+.table-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 20px;
+}
+.table-col {
+  display: flex;
+  flex-direction: column;
+}
+.freq-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 6px;
+  border-bottom: 1px solid #808080;
+  font-size: 11px;
+  background: #ffffff;
+}
+.freq-row:nth-child(even) {
+  background: #c0c0c0;
+}
+.freq-row:last-child {
+  border-bottom: 2px solid #000000;
+}
+.letter {
+  color: #000000;
+  font-weight: bold;
+}
+.freq {
+  color: #000000;
+}
+canvas {
+  width: 100%;
+  height: 150px;
+  background: #ffffff;
+  border: 2px solid;
+  border-color: #000000 #ffffff #ffffff #000000;
+  margin-bottom: 10px;
+}
+.window-header {
+  background: linear-gradient(to bottom, #0997FF, #0053EE 8%, #003DD9 40%, #0050EE);
+  color: white;
+  padding: 2px 4px;
+  font-weight: bold;
+  font-size: 11px;
+  margin: -10px -10px 10px -10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>HZAlphabet - Audio Frequency Cipher (only one of its kind)</h1>
+  
+  <div class="tabs">
+    <button class="tab active" data-tab="encoder">Encoder</button>
+    <button class="tab" data-tab="decoder">Decoder</button>
+  </div>
+  
+  <div id="encoder" class="tab-content active">
+    <div class="section">
+      <div class="window-header">Input Text</div>
+      <textarea id="inputText" placeholder="Enter your message here...">Hello World</textarea>
+      <div class="info" id="summary">10 letters, 2 words, ~2.24 seconds</div>
+    </div>
+    
+    <div class="section">
+      <div class="window-header">Visualization</div>
+      <canvas id="visualization"></canvas>
+      <div class="buttons">
+        <button id="playBtn">Play</button>
+        <button id="stopBtn" disabled>Stop</button>
+        <button id="downloadBtn">Download</button>
+      </div>
+    </div>
+    
+    <div class="section">
+      <div class="window-header">Parameters</div>
+      <div class="controls">
+        <div class="control-group">
+          <label>Volume</label>
+          <div class="control-row">
+            <input type="number" id="volumeNum" min="0" max="1" step="0.1" value="0.6">
+            <input type="range" id="volumeRange" min="0" max="1" step="0.01" value="0.6">
+          </div>
+        </div>
+        <div class="control-group">
+          <label>Tone Duration (ms)</label>
+          <div class="control-row">
+            <input type="number" id="durationNum" min="50" max="1000" step="10" value="200">
+            <input type="range" id="durationRange" min="50" max="1000" step="10" value="200">
+          </div>
+        </div>
+        <div class="control-group">
+          <label>Letter Gap (ms)</label>
+          <div class="control-row">
+            <input type="number" id="letterGapNum" min="0" max="500" step="10" value="40">
+            <input type="range" id="letterGapRange" min="0" max="500" step="10" value="40">
+          </div>
+          <div class="info" style="margin-top: 2px; font-size: 10px;"> >40ms letter gaps are essential for decoding</div>
+        </div>
+        <div class="control-group">
+          <label>Word Gap (ms)</label>
+          <div class="control-row">
+            <input type="number" id="wordGapNum" min="0" max="1000" step="10" value="180">
+            <input type="range" id="wordGapRange" min="0" max="1000" step="10" value="180">
+          </div>
+        </div>
+        <div class="control-group">
+          <label>Fade (ms)</label>
+          <div class="control-row">
+            <input type="number" id="fadeNum" min="0" max="100" step="1" value="0">
+            <input type="range" id="fadeRange" min="0" max="100" step="1" value="0">
+          </div>
+          <div class="info" style="margin-top: 2px; font-size: 10px;">Use 0 for best decoding</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="decoder" class="tab-content">
+    <div class="section">
+      <div class="window-header">Upload WAV File</div>
+      <div class="info" style="margin-bottom: 10px;">
+        Note: Decoding may not be perfect. Use files with CLEAR letter gaps and zero fade for best results. (and word gaps need to be emphasized so it counts the spaces)
+    
+      </div>
+      <input type="file" id="fileInput" accept=".wav,audio/wav">
+      <div class="buttons">
+        <button id="decodeBtn">Decode</button>
+      </div>
+      <div class="info" id="decodeStatus" style="margin-top: 8px;"></div>
+    </div>
+    
+    <div class="section">
+      <div class="window-header">Decoded Text</div>
+      <textarea id="decodedText" placeholder="Decoded text will appear here..." readonly></textarea>
+    </div>
+  </div>
+  
+  <div class="section">
+    <div class="window-header">Frequency Table (A-Z)</div>
+    <div class="table-wrapper">
+      <div class="table-col" id="tableCol1"></div>
+      <div class="table-col" id="tableCol2"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const freqMap = {
+  A: 220.00, B: 233.08, C: 246.94, D: 261.63, E: 277.18, F: 293.66,
+  G: 311.13, H: 329.63, I: 349.23, J: 369.99, K: 392.00, L: 415.30,
+  M: 440.00, N: 466.16, O: 493.88, P: 523.25, Q: 554.37, R: 587.33,
+  S: 622.25, T: 659.25, U: 698.46, V: 739.99, W: 783.99, X: 830.61,
+  Y: 880.00, Z: 932.33
+};
+
+let audioContext = null;
+let currentNodes = [];
+let analyser = null;
+let animationId = null;
+
+function initFreqTable() {
+  const letters = Object.keys(freqMap);
+  const col1 = document.getElementById('tableCol1');
+  const col2 = document.getElementById('tableCol2');
+  
+  const mid = Math.ceil(letters.length / 2);
+  
+  letters.slice(0, mid).forEach(letter => {
+    const div = document.createElement('div');
+    div.className = 'freq-row';
+    div.innerHTML = `<span class="letter">${letter}</span><span class="freq">${freqMap[letter].toFixed(2)} Hz</span>`;
+    col1.appendChild(div);
+  });
+  
+  letters.slice(mid).forEach(letter => {
+    const div = document.createElement('div');
+    div.className = 'freq-row';
+    div.innerHTML = `<span class="letter">${letter}</span><span class="freq">${freqMap[letter].toFixed(2)} Hz</span>`;
+    col2.appendChild(div);
+  });
+}
+
+function syncControls(numId, rangeId) {
+  const num = document.getElementById(numId);
+  const range = document.getElementById(rangeId);
+  
+  num.addEventListener('input', () => {
+    range.value = num.value;
+    updateSummary();
+  });
+  
+  range.addEventListener('input', () => {
+    num.value = range.value;
+    updateSummary();
+  });
+}
+
+function getParams() {
+  return {
+    volume: parseFloat(document.getElementById('volumeNum').value),
+    duration: parseFloat(document.getElementById('durationNum').value),
+    letterGap: parseFloat(document.getElementById('letterGapNum').value),
+    wordGap: parseFloat(document.getElementById('wordGapNum').value),
+    fade: parseFloat(document.getElementById('fadeNum').value)
+  };
+}
+
+function parseText(text) {
+  const tokens = [];
+  let inWord = false;
+  
+  for (let char of text.toUpperCase()) {
+    if (freqMap[char]) {
+      tokens.push({ type: 'letter', char, freq: freqMap[char] });
+      inWord = true;
+    } else if (char === ' ' && inWord) {
+      tokens.push({ type: 'word_gap' });
+      inWord = false;
+    }
+  }
+  
+  return tokens;
+}
+
+function calculateDuration(tokens, params) {
+  let total = 0;
+  for (let i = 0; i < tokens.length; i++) {
+    const token = tokens[i];
+    if (token.type === 'letter') {
+      total += params.duration;
+      if (i < tokens.length - 1 && tokens[i + 1].type === 'letter') {
+        total += params.letterGap;
+      }
+    } else if (token.type === 'word_gap') {
+      total += params.wordGap;
+    }
+  }
+  return total / 1000;
+}
+
+function updateSummary() {
+  const text = document.getElementById('inputText').value;
+  const tokens = parseText(text);
+  const params = getParams();
+  
+  const letterCount = tokens.filter(t => t.type === 'letter').length;
+  const wordCount = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+  const duration = calculateDuration(tokens, params);
+  
+  document.getElementById('summary').textContent = 
+    `${letterCount} letters, ${wordCount} words, ~${duration.toFixed(2)} seconds`;
+  
+  drawVisualization(tokens);
+}
+
+function drawVisualization(tokens) {
+  const canvas = document.getElementById('visualization');
+  const ctx = canvas.getContext('2d');
+  const width = canvas.width = canvas.offsetWidth;
+  const height = canvas.height = canvas.offsetHeight;
+  
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, width, height);
+  
+  const minFreq = 0;
+  const maxFreq = 1000;
+  const paddingLeft = 50;
+  const paddingTop = 10;
+  const paddingBottom = 25;
+  const graphHeight = height - paddingTop - paddingBottom;
+  
+  ctx.font = '10px "MS Sans Serif", sans-serif';
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#000000';
+  
+  for (let freq = 0; freq <= maxFreq; freq += 200) {
+    const y = paddingTop + (1 - freq / maxFreq) * graphHeight;
+    ctx.strokeStyle = '#c0c0c0';
+    ctx.beginPath();
+    ctx.moveTo(paddingLeft, y);
+    ctx.lineTo(width, y);
+    ctx.stroke();
+    ctx.fillText(freq + ' Hz', paddingLeft - 5, y + 3);
+  }
+  
+  ctx.strokeStyle = '#000000';
+  ctx.beginPath();
+  ctx.moveTo(paddingLeft, paddingTop);
+  ctx.lineTo(paddingLeft, paddingTop + graphHeight);
+  ctx.stroke();
+  
+  if (tokens.length === 0) return;
+  
+  const letterTokens = tokens.filter(t => t.type === 'letter');
+  if (letterTokens.length === 0) return;
+  
+  const barWidth = Math.max(2, (width - paddingLeft - 20) / letterTokens.length);
+  
+  letterTokens.forEach((token, i) => {
+    const x = paddingLeft + 10 + i * barWidth;
+    const normalizedFreq = token.freq / maxFreq;
+    const y = paddingTop + (1 - normalizedFreq) * graphHeight;
+    const barHeight = graphHeight - (y - paddingTop);
+    
+    ctx.fillStyle = '#000080';
+    ctx.fillRect(x, y, barWidth - 2, barHeight);
+    
+    if (barWidth > 10) {
+      ctx.fillStyle = '#000000';
+      ctx.font = '9px "MS Sans Serif", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(token.char, x + barWidth / 2 - 1, paddingTop + graphHeight + 15);
+    }
+  });
+}
+
+function drawLiveVisualization() {
+  if (!analyser) return;
+  
+  const canvas = document.getElementById('visualization');
+  const ctx = canvas.getContext('2d');
+  const width = canvas.width = canvas.offsetWidth;
+  const height = canvas.height = canvas.offsetHeight;
+  
+  const bufferLength = analyser.frequencyBinCount;
+  const dataArray = new Uint8Array(bufferLength);
+  analyser.getByteFrequencyData(dataArray);
+  
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, width, height);
+  
+  const minFreq = 0;
+  const maxFreq = 1000;
+  const paddingLeft = 50;
+  const paddingTop = 10;
+  const paddingBottom = 25;
+  const graphHeight = height - paddingTop - paddingBottom;
+  
+  ctx.font = '10px "MS Sans Serif", sans-serif';
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#000000';
+  
+  for (let freq = 0; freq <= maxFreq; freq += 200) {
+    const y = paddingTop + (1 - freq / maxFreq) * graphHeight;
+    ctx.strokeStyle = '#c0c0c0';
+    ctx.beginPath();
+    ctx.moveTo(paddingLeft, y);
+    ctx.lineTo(width, y);
+    ctx.stroke();
+    ctx.fillText(freq + ' Hz', paddingLeft - 5, y + 3);
+  }
+  
+  ctx.strokeStyle = '#000000';
+  ctx.beginPath();
+  ctx.moveTo(paddingLeft, paddingTop);
+  ctx.lineTo(paddingLeft, paddingTop + graphHeight);
+  ctx.stroke();
+  
+  const sampleRate = audioContext.sampleRate;
+  let maxAmplitude = 0;
+  let maxIndex = 0;
+  
+  for (let i = 0; i < bufferLength; i++) {
+    if (dataArray[i] > maxAmplitude) {
+      maxAmplitude = dataArray[i];
+      maxIndex = i;
+    }
+  }
+  
+  if (maxAmplitude > 30) {
+    const frequency = (maxIndex * sampleRate) / (bufferLength * 2);
+    
+    if (frequency <= maxFreq && frequency > 0) {
+      const x = paddingLeft + 10;
+      const barWidth = width - paddingLeft - 20;
+      const normalizedFreq = frequency / maxFreq;
+      const y = paddingTop + (1 - normalizedFreq) * graphHeight;
+      const barHeight = graphHeight - (y - paddingTop);
+      
+      ctx.fillStyle = '#000080';
+      ctx.fillRect(x, y, barWidth, barHeight);
+      
+      ctx.fillStyle = '#000000';
+      ctx.font = '11px "MS Sans Serif", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(frequency.toFixed(1) + ' Hz', x + barWidth / 2, Math.max(paddingTop + 15, y - 5));
+      
+      let closestLetter = '';
+      let minDiff = Infinity;
+      for (let letter in freqMap) {
+        const diff = Math.abs(freqMap[letter] - frequency);
+        if (diff < minDiff) {
+          minDiff = diff;
+          closestLetter = letter;
+        }
+      }
+      
+      if (minDiff < 20) {
+        ctx.fillStyle = '#000000';
+        ctx.font = 'bold 14px "MS Sans Serif", sans-serif';
+        ctx.fillText(closestLetter, x + barWidth / 2, paddingTop + graphHeight + 15);
+      }
+    }
+  }
+  
+  animationId = requestAnimationFrame(drawLiveVisualization);
+}
+
+function playAudio() {
+  stopAudio();
+  
+  const text = document.getElementById('inputText').value;
+  const tokens = parseText(text);
+  const params = getParams();
+  
+  if (tokens.length === 0) return;
+  
+  audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  
+  analyser = audioContext.createAnalyser();
+  analyser.fftSize = 8192;
+  analyser.smoothingTimeConstant = 0.8;
+  analyser.connect(audioContext.destination);
+  
+  let time = audioContext.currentTime;
+  
+  tokens.forEach((token, i) => {
+    if (token.type === 'letter') {
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      
+      osc.type = 'sine';
+      osc.frequency.value = token.freq;
+      
+      const fadeTime = params.fade / 1000;
+      const duration = params.duration / 1000;
+      
+      gain.gain.setValueAtTime(0, time);
+      gain.gain.linearRampToValueAtTime(params.volume, time + fadeTime);
+      gain.gain.setValueAtTime(params.volume, time + duration - fadeTime);
+      gain.gain.linearRampToValueAtTime(0, time + duration);
+      
+      osc.connect(gain);
+      gain.connect(analyser);
+      
+      osc.start(time);
+      osc.stop(time + duration);
+      
+      currentNodes.push(osc);
+      currentNodes.push(gain);
+      
+      time += duration;
+      if (i < tokens.length - 1 && tokens[i + 1].type === 'letter') {
+        time += params.letterGap / 1000;
+      }
+    } else if (token.type === 'word_gap') {
+      time += params.wordGap / 1000;
+    }
+  });
+  
+  document.getElementById('playBtn').disabled = true;
+  document.getElementById('stopBtn').disabled = false;
+  
+  drawLiveVisualization();
+  
+  setTimeout(() => {
+    stopAudio();
+    const text = document.getElementById('inputText').value;
+    const tokens = parseText(text);
+    drawVisualization(tokens);
+  }, time * 1000 - audioContext.currentTime * 1000 + 100);
+}
+
+function stopAudio() {
+  if (animationId) {
+    cancelAnimationFrame(animationId);
+    animationId = null;
+  }
+  
+  if (audioContext) {
+    currentNodes.forEach(node => {
+      try {
+        if (node.stop) node.stop();
+        if (node.disconnect) node.disconnect();
+      } catch (e) {}
+    });
+    currentNodes = [];
+    analyser = null;
+    audioContext.close();
+    audioContext = null;
+  }
+  
+  document.getElementById('playBtn').disabled = false;
+  document.getElementById('stopBtn').disabled = true;
+}
+
+async function downloadWAV() {
+  const text = document.getElementById('inputText').value;
+  const tokens = parseText(text);
+  const params = getParams();
+  
+  if (tokens.length === 0) return;
+  
+  document.getElementById('downloadBtn').disabled = true;
+  document.getElementById('downloadBtn').textContent = 'Rendering...';
+  
+  const duration = calculateDuration(tokens, params);
+  const sampleRate = 44100;
+  const length = Math.ceil(duration * sampleRate);
+  
+  const offlineCtx = new OfflineAudioContext(1, length, sampleRate);
+  let time = 0;
+  
+  tokens.forEach((token, i) => {
+    if (token.type === 'letter') {
+      const osc = offlineCtx.createOscillator();
+      const gain = offlineCtx.createGain();
+      
+      osc.type = 'sine';
+      osc.frequency.value = token.freq;
+      
+      const fadeTime = params.fade / 1000;
+      const toneDuration = params.duration / 1000;
+      
+      gain.gain.setValueAtTime(0, time);
+      gain.gain.linearRampToValueAtTime(params.volume, time + fadeTime);
+      gain.gain.setValueAtTime(params.volume, time + toneDuration - fadeTime);
+      gain.gain.linearRampToValueAtTime(0, time + toneDuration);
+      
+      osc.connect(gain);
+      gain.connect(offlineCtx.destination);
+      
+      osc.start(time);
+      osc.stop(time + toneDuration);
+      
+      time += toneDuration;
+      if (i < tokens.length - 1 && tokens[i + 1].type === 'letter') {
+        time += params.letterGap / 1000;
+      }
+    } else if (token.type === 'word_gap') {
+      time += params.wordGap / 1000;
+    }
+  });
+  
+  const buffer = await offlineCtx.startRendering();
+  const wav = encodeWAV(buffer);
+  const blob = new Blob([wav], { type: 'audio/wav' });
+  
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'cipher_audio.wav';
+  a.click();
+  URL.revokeObjectURL(url);
+  
+  document.getElementById('downloadBtn').disabled = false;
+  document.getElementById('downloadBtn').textContent = 'Download';
+}
+
+function encodeWAV(buffer) {
+  const numChannels = 1;
+  const sampleRate = buffer.sampleRate;
+  const format = 1;
+  const bitDepth = 16;
+  
+  const samples = buffer.getChannelData(0);
+  const numSamples = samples.length;
+  
+  const dataLength = numSamples * numChannels * (bitDepth / 8);
+  const bufferLength = 44 + dataLength;
+  
+  const arrayBuffer = new ArrayBuffer(bufferLength);
+  const view = new DataView(arrayBuffer);
+  
+  writeString(view, 0, 'RIFF');
+  view.setUint32(4, 36 + dataLength, true);
+  writeString(view, 8, 'WAVE');
+  writeString(view, 12, 'fmt ');
+  view.setUint32(16, 16, true);
+  view.setUint16(20, format, true);
+  view.setUint16(22, numChannels, true);
+  view.setUint32(24, sampleRate, true);
+  view.setUint32(28, sampleRate * numChannels * (bitDepth / 8), true);
+  view.setUint16(32, numChannels * (bitDepth / 8), true);
+  view.setUint16(34, bitDepth, true);
+  writeString(view, 36, 'data');
+  view.setUint32(40, dataLength, true);
+  
+  let offset = 44;
+  for (let i = 0; i < numSamples; i++) {
+    const sample = Math.max(-1, Math.min(1, samples[i]));
+    const int16 = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
+    view.setInt16(offset, int16, true);
+    offset += 2;
+  }
+  
+  return arrayBuffer;
+}
+
+function writeString(view, offset, string) {
+  for (let i = 0; i < string.length; i++) {
+    view.setUint8(offset + i, string.charCodeAt(i));
+  }
+}
+
+syncControls('volumeNum', 'volumeRange');
+syncControls('durationNum', 'durationRange');
+syncControls('letterGapNum', 'letterGapRange');
+syncControls('wordGapNum', 'wordGapRange');
+syncControls('fadeNum', 'fadeRange');
+
+document.getElementById('inputText').addEventListener('input', updateSummary);
+document.getElementById('playBtn').addEventListener('click', playAudio);
+document.getElementById('stopBtn').addEventListener('click', stopAudio);
+document.getElementById('downloadBtn').addEventListener('click', downloadWAV);
+document.getElementById('decodeBtn').addEventListener('click', decodeWAV);
+
+async function decodeWAV() {
+  const fileInput = document.getElementById('fileInput');
+  const file = fileInput.files[0];
+  
+  if (!file) {
+    document.getElementById('decodeStatus').textContent = 'Please select a WAV file first';
+    return;
+  }
+  
+  document.getElementById('decodeStatus').textContent = 'Decoding...';
+  document.getElementById('decodedText').value = '';
+  
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+    
+    const channelData = audioBuffer.getChannelData(0);
+    const sampleRate = audioBuffer.sampleRate;
+    const windowSize = Math.floor(sampleRate * 0.05);
+    const hopSize = Math.floor(sampleRate * 0.01);
+    
+    const detectedLetters = [];
+    let lastFreq = 0;
+    let lastLetter = '';
+    let silenceCount = 0;
+    
+    for (let i = 0; i < channelData.length - windowSize; i += hopSize) {
+      const window = channelData.slice(i, i + windowSize);
+      
+      const rms = Math.sqrt(window.reduce((sum, val) => sum + val * val, 0) / window.length);
+      
+      if (rms < 0.01) {
+        silenceCount++;
+        if (silenceCount > 5 && lastLetter) {
+          detectedLetters.push(' ');
+          lastLetter = '';
+        }
+        continue;
+      }
+      
+      silenceCount = 0;
+      
+      const freq = detectFrequency(window, sampleRate);
+      
+      if (freq > 0 && freq < 1000) {
+        let closestLetter = '';
+        let minDiff = Infinity;
+        
+        for (let letter in freqMap) {
+          const diff = Math.abs(freqMap[letter] - freq);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestLetter = letter;
+          }
+        }
+        
+        if (minDiff < 15 && closestLetter !== lastLetter) {
+          detectedLetters.push(closestLetter);
+          lastLetter = closestLetter;
+          lastFreq = freq;
+        }
+      }
+    }
+    
+    const decodedText = detectedLetters.join('').replace(/\s+/g, ' ').trim();
+    document.getElementById('decodedText').value = decodedText;
+    document.getElementById('decodeStatus').textContent = `Decoded ${detectedLetters.length} letters`;
+    
+    audioContext.close();
+  } catch (error) {
+    document.getElementById('decodeStatus').textContent = 'Error decoding file: ' + error.message;
+  }
+}
+
+function detectFrequency(samples, sampleRate) {
+  const minPeriod = Math.floor(sampleRate / 1000);
+  const maxPeriod = Math.floor(sampleRate / 200);
+  
+  let bestCorrelation = 0;
+  let bestPeriod = 0;
+  
+  for (let period = minPeriod; period < maxPeriod && period < samples.length / 2; period++) {
+    let correlation = 0;
+    
+    for (let i = 0; i < samples.length - period; i++) {
+      correlation += samples[i] * samples[i + period];
+    }
+    
+    if (correlation > bestCorrelation) {
+      bestCorrelation = correlation;
+      bestPeriod = period;
+    }
+  }
+  
+  if (bestPeriod === 0) return 0;
+  return sampleRate / bestPeriod;
+}
+
+initFreqTable();
+updateSummary();
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const tabName = tab.getAttribute('data-tab');
+    
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    
+    tab.classList.add('active');
+    document.getElementById(tabName).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
